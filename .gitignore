@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# database
+uber-tracker.db
+uber-tracker.db-journal
+*.db
+*.db-journal
