@@ -1,36 +1,141 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Uber Income & Loan Tracker
+
+A comprehensive financial tracking application built with Next.js to help you manage your Uber income, expenses, loans, and working hours. This app helps you stay on top of your finances and ensure profitability.
+
+## Features
+
+- **Dashboard**: Get an overview of your financial health with key metrics like total income, expenses, net profit, and hourly rate
+- **Income Tracking**: Log your daily Uber earnings with notes
+- **Expense Tracking**: Track charging costs and other expenses separately
+- **Loan Management**: Manage multiple loans with payment tracking and balance updates
+- **Hours Tracking**: Record your daily working hours with start/end times
+- **Financial Analytics**: View profit margins, expense ratios, and loan burden percentages
+
+## Tech Stack
+
+- **Framework**: Next.js 15 with App Router
+- **Database**: SQLite with better-sqlite3
+- **UI**: Aceternity UI components with Tailwind CSS
+- **Language**: TypeScript
+- **Animations**: Framer Motion
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js v20 or higher
+- npm
+
+### Installation
+
+1. Install dependencies (if not already done):
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Start the development server:
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Open your browser and visit:
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
 
-## Learn More
+### Dashboard
+The dashboard provides a comprehensive overview of your finances:
+- Total income from Uber
+- Total expenses (broken down by charging and other)
+- Active loan balances
+- Net profit calculation
+- Total hours worked
+- Hourly rate calculation
+- Financial health metrics (profit margin, expense ratio, loan burden)
 
-To learn more about Next.js, take a look at the following resources:
+### Income Tracking
+1. Navigate to the "Income" page
+2. Enter the date, amount, and optional notes
+3. Click "Add Income" to save
+4. View all your income entries in the history panel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Expense Tracking
+1. Go to the "Expenses" page
+2. Select the expense type (Charging or Other)
+3. Enter the date, amount, and optional notes
+4. Click "Add Expense" to save
+5. Track charging vs. other expenses separately
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Loan Management
+1. Visit the "Loans" page
+2. Add a new loan with name, principal amount, interest rate, and due date
+3. Make payments by entering an amount and clicking "Make Payment"
+4. The app automatically updates the balance and marks loans as "paid" when fully paid
+5. View payment history and track progress
 
-## Deploy on Vercel
+### Hours Tracking
+1. Go to the "Hours" page
+2. Log your daily working hours
+3. Optionally add start time, end time, and notes
+4. View your total hours worked over time
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Database
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The application uses SQLite for data storage. The database file (`uber-tracker.db`) is automatically created in the project root when you first run the app.
+
+### Tables
+- `income`: Daily Uber earnings
+- `expenses`: Charging and other costs
+- `loans`: Loan information and balances
+- `work_hours`: Daily working hours
+- `loan_payments`: Payment history for loans
+
+## Development
+
+### Build for Production
+```bash
+npm run build
+```
+
+### Start Production Server
+```bash
+npm start
+```
+
+### Lint
+```bash
+npm run lint
+```
+
+## Project Structure
+
+```
+uber-tracker/
+├── app/
+│   ├── api/           # API routes for CRUD operations
+│   ├── expenses/      # Expenses tracking page
+│   ├── hours/         # Hours tracking page
+│   ├── income/        # Income tracking page
+│   ├── loans/         # Loan management page
+│   ├── layout.tsx     # Root layout with navigation
+│   └── page.tsx       # Dashboard page
+├── components/
+│   ├── ui/            # Aceternity UI components
+│   └── Navigation.tsx # Navigation component
+├── lib/
+│   ├── db.ts          # Database connection and schema
+│   ├── types.ts       # TypeScript interfaces
+│   └── utils.ts       # Utility functions
+└── public/            # Static assets
+```
+
+## Tips for Maximum Profitability
+
+1. **Track Daily**: Log your income, expenses, and hours every day for accurate insights
+2. **Monitor Charging Costs**: Keep a close eye on charging expenses as they can eat into profits
+3. **Manage Loans**: Make regular payments to reduce loan burden and free up more profit
+4. **Analyze Hourly Rate**: Use the dashboard to ensure your hourly rate meets your goals
+5. **Review Profit Margin**: Aim to keep your profit margin healthy by controlling expenses
+# uber-tracker
