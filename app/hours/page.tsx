@@ -16,6 +16,7 @@ export default function HoursPage() {
     end_time: "",
     notes: "",
   });
+  const [spansNextDay, setSpansNextDay] = useState(false);
 
   useEffect(() => {
     fetchHours();
@@ -30,6 +31,58 @@ export default function HoursPage() {
       console.error("Failed to fetch hours:", error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const calculateHours = (start: string, end: string, nextDay: boolean) => {
+    if (!start || !end) return 0;
+    
+    const [startHour, startMin] = start.split(':').map(Number);
+    const [endHour, endMin] = end.split(':').map(Number);
+    
+    let startMinutes = startHour * 60 + startMin;
+    let endMinutes = endHour * 60 + endMin;
+    
+    // If work spans to next day, add 24 hours to end time
+    if (nextDay) {
+      endMinutes += 24 * 60;
+    }
+    // If end time is earlier than start time and not marked as next day, assume next day
+    else if (endMinutes < startMinutes) {
+      endMinutes += 24 * 60;
+      setSpansNextDay(true);
+    }
+    
+    const totalMinutes = endMinutes - startMinutes;
+    const hours = totalMinutes / 60;
+    
+    return Math.max(0, Math.round(hours * 100) / 100); // Round to 2 decimal places
+  };
+
+  const handleTimeChange = (field: 'start_time' | 'end_time', value: string) => {
+    const newFormData = { ...formData, [field]: value };
+    setFormData(newFormData);
+    
+    // Auto-calculate hours if both times are set
+    if (newFormData.start_time && newFormData.end_time) {
+      const calculatedHours = calculateHours(
+        newFormData.start_time,
+        newFormData.end_time,
+        spansNextDay
+      );
+      setFormData(prev => ({ ...prev, hours_worked: calculatedHours.toString() }));
+    }
+  };
+
+  const handleSpansNextDayChange = (checked: boolean) => {
+    setSpansNextDay(checked);
+    if (formData.start_time && formData.end_time) {
+      const calculatedHours = calculateHours(
+        formData.start_time,
+        formData.end_time,
+        checked
+      );
+      setFormData(prev => ({ ...prev, hours_worked: calculatedHours.toString() }));
     }
   };
 
@@ -50,6 +103,7 @@ export default function HoursPage() {
           end_time: "",
           notes: "",
         });
+        setSpansNextDay(false);
         fetchHours();
       }
     } catch (error) {
@@ -73,7 +127,7 @@ export default function HoursPage() {
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-4xl font-bold mb-2">Work Hours Tracking</h1>
-        <p className="text-gray-400">Track your daily working hours</p>
+        <p className="text-gray-600 dark:text-gray-400">Track your daily working hours</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -93,40 +147,53 @@ export default function HoursPage() {
               />
             </div>
             <div>
-              <Label htmlFor="hours_worked">Hours Worked</Label>
+              <Label htmlFor="start_time">Start Time</Label>
+              <Input
+                id="start_time"
+                type="time"
+                value={formData.start_time}
+                onChange={(e) => handleTimeChange('start_time', e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="end_time">End Time</Label>
+              <Input
+                id="end_time"
+                type="time"
+                value={formData.end_time}
+                onChange={(e) => handleTimeChange('end_time', e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label className="flex items-center gap-2 text-sm">
+                <input
+                  type="checkbox"
+                  checked={spansNextDay}
+                  onChange={(e) => handleSpansNextDayChange(e.target.checked)}
+                  className="w-4 h-4 rounded border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-800"
+                />
+                <span className="text-gray-700 dark:text-gray-300">Work continues into next day</span>
+              </label>
+            </div>
+            <div>
+              <Label htmlFor="hours_worked">Hours Worked (Auto-calculated)</Label>
               <Input
                 id="hours_worked"
                 type="number"
-                step="0.5"
-                placeholder="8.0"
+                step="0.01"
+                placeholder="Calculated from times"
                 value={formData.hours_worked}
                 onChange={(e) =>
                   setFormData({ ...formData, hours_worked: e.target.value })
                 }
                 required
+                className="bg-gray-200 dark:bg-gray-700"
               />
-            </div>
-            <div>
-              <Label htmlFor="start_time">Start Time (Optional)</Label>
-              <Input
-                id="start_time"
-                type="time"
-                value={formData.start_time}
-                onChange={(e) =>
-                  setFormData({ ...formData, start_time: e.target.value })
-                }
-              />
-            </div>
-            <div>
-              <Label htmlFor="end_time">End Time (Optional)</Label>
-              <Input
-                id="end_time"
-                type="time"
-                value={formData.end_time}
-                onChange={(e) =>
-                  setFormData({ ...formData, end_time: e.target.value })
-                }
-              />
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                {formData.hours_worked && `${formData.hours_worked} hours = ${(parseFloat(formData.hours_worked) * 60).toFixed(0)} minutes`}
+              </p>
             </div>
             <div>
               <Label htmlFor="notes">Notes (Optional)</Label>
@@ -150,38 +217,38 @@ export default function HoursPage() {
           <div className="flex justify-between items-center mb-4">
             <CardTitle>Hours History</CardTitle>
             <div className="text-right">
-              <p className="text-sm text-gray-400">Total Hours</p>
-              <p className="text-2xl font-bold text-blue-400">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Total Hours</p>
+              <p className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                 {totalHours.toFixed(1)} hrs
               </p>
             </div>
           </div>
 
           {loading ? (
-            <p className="text-gray-400">Loading...</p>
+            <p className="text-gray-600 dark:text-gray-400">Loading...</p>
           ) : hours.length === 0 ? (
-            <p className="text-gray-400">No hours logged yet. Add your first entry!</p>
+            <p className="text-gray-600 dark:text-gray-400">No hours logged yet. Add your first entry!</p>
           ) : (
             <div className="space-y-3 max-h-[600px] overflow-y-auto">
               {hours.map((entry) => (
                 <div
                   key={entry.id}
-                  className="flex justify-between items-center p-4 bg-gray-800 rounded-lg"
+                  className="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700 transition-colors"
                 >
                   <div className="flex-1">
-                    <p className="font-semibold text-white">
+                    <p className="font-semibold text-gray-900 dark:text-white">
                       {entry.hours_worked} hours
                     </p>
-                    <p className="text-sm text-gray-400">{entry.date}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{entry.date}</p>
                     {(entry.start_time || entry.end_time) && (
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-gray-500 dark:text-gray-500">
                         {entry.start_time && `Start: ${entry.start_time}`}
                         {entry.start_time && entry.end_time && " | "}
                         {entry.end_time && `End: ${entry.end_time}`}
                       </p>
                     )}
                     {entry.notes && (
-                      <p className="text-sm text-gray-500 mt-1">{entry.notes}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">{entry.notes}</p>
                     )}
                   </div>
                   <Button

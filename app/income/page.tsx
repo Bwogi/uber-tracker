@@ -69,7 +69,7 @@ export default function IncomePage() {
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="mb-8">
         <h1 className="text-4xl font-bold mb-2">Income Tracking</h1>
-        <p className="text-gray-400">Track your daily Uber earnings</p>
+        <p className="text-gray-600 dark:text-gray-400">Track your daily Uber earnings</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -124,31 +124,31 @@ export default function IncomePage() {
           <div className="flex justify-between items-center mb-4">
             <CardTitle>Income History</CardTitle>
             <div className="text-right">
-              <p className="text-sm text-gray-400">Total Income</p>
-              <p className="text-2xl font-bold text-green-400">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Total Income</p>
+              <p className="text-2xl font-bold text-green-600 dark:text-green-400">
                 ${totalIncome.toFixed(2)}
               </p>
             </div>
           </div>
 
           {loading ? (
-            <p className="text-gray-400">Loading...</p>
+            <p className="text-gray-600 dark:text-gray-400">Loading...</p>
           ) : income.length === 0 ? (
-            <p className="text-gray-400">No income entries yet. Add your first entry!</p>
+            <p className="text-gray-600 dark:text-gray-400">No income entries yet. Add your first entry!</p>
           ) : (
             <div className="space-y-3 max-h-[600px] overflow-y-auto">
               {income.map((entry) => (
                 <div
                   key={entry.id}
-                  className="flex justify-between items-center p-4 bg-gray-800 rounded-lg"
+                  className="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700 transition-colors"
                 >
                   <div className="flex-1">
-                    <p className="font-semibold text-white">
+                    <p className="font-semibold text-gray-900 dark:text-white">
                       ${entry.amount.toFixed(2)}
                     </p>
-                    <p className="text-sm text-gray-400">{entry.date}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">{entry.date}</p>
                     {entry.notes && (
-                      <p className="text-sm text-gray-500 mt-1">{entry.notes}</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">{entry.notes}</p>
                     )}
                   </div>
                   <Button

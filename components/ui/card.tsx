@@ -10,7 +10,7 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "rounded-2xl p-6 bg-gray-900 border border-gray-800 shadow-xl",
+        "rounded-2xl p-6 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-xl transition-colors",
         className
       )}
     >
@@ -27,7 +27,7 @@ export const CardTitle = ({
   children: React.ReactNode;
 }) => {
   return (
-    <h3 className={cn("text-2xl font-bold text-white mb-2", className)}>
+    <h3 className={cn("text-2xl font-bold text-gray-900 dark:text-white mb-2", className)}>
       {children}
     </h3>
   );
@@ -41,6 +41,6 @@ export const CardDescription = ({
   children: React.ReactNode;
 }) => {
   return (
-    <p className={cn("text-gray-400 text-sm", className)}>{children}</p>
+    <p className={cn("text-gray-600 dark:text-gray-400 text-sm", className)}>{children}</p>
   );
 };

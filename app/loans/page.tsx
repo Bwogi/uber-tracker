@@ -165,49 +165,49 @@ export default function LoansPage() {
           <div className="flex justify-between items-center mb-4">
             <CardTitle>Your Loans</CardTitle>
             <div className="text-right">
-              <p className="text-sm text-gray-400">Total Balance</p>
-              <p className="text-2xl font-bold text-orange-400">
+              <p className="text-sm text-gray-600 dark:text-gray-400">Total Balance</p>
+              <p className="text-2xl font-bold text-orange-600 dark:text-orange-400">
                 ${totalBalance.toFixed(2)}
               </p>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
                 Total Paid: ${totalPaid.toFixed(2)}
               </p>
             </div>
           </div>
 
           {loading ? (
-            <p className="text-gray-400">Loading...</p>
+            <p className="text-gray-600 dark:text-gray-400">Loading...</p>
           ) : loans.length === 0 ? (
-            <p className="text-gray-400">No loans yet. Add your first loan!</p>
+            <p className="text-gray-600 dark:text-gray-400">No loans yet. Add your first loan!</p>
           ) : (
             <div className="space-y-4 max-h-[600px] overflow-y-auto">
               {loans.map((loan) => (
                 <div
                   key={loan.id}
-                  className="p-4 bg-gray-800 rounded-lg border border-gray-700"
+                  className="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg border border-gray-300 dark:border-gray-700 transition-colors"
                 >
                   <div className="flex justify-between items-start mb-3">
                     <div>
                       <div className="flex items-center gap-2">
-                        <h3 className="font-bold text-white text-lg">
+                        <h3 className="font-bold text-gray-900 dark:text-white text-lg">
                           {loan.name}
                         </h3>
                         <span
                           className={`text-xs px-2 py-1 rounded ${
                             loan.status === "paid"
-                              ? "bg-green-900 text-green-200"
-                              : "bg-orange-900 text-orange-200"
+                              ? "bg-green-200 dark:bg-green-900 text-green-800 dark:text-green-200"
+                              : "bg-orange-200 dark:bg-orange-900 text-orange-800 dark:text-orange-200"
                           }`}
                         >
                           {loan.status}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-400 mt-1">
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                         Principal: ${loan.principal_amount.toFixed(2)} | Rate:{" "}
                         {loan.interest_rate}%
                       </p>
                       {loan.due_date && (
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-gray-500 dark:text-gray-500">
                           Due: {loan.due_date}
                         </p>
                       )}
@@ -223,14 +223,14 @@ export default function LoansPage() {
 
                   <div className="grid grid-cols-2 gap-4 mb-3">
                     <div>
-                      <p className="text-xs text-gray-400">Balance</p>
-                      <p className="text-lg font-bold text-orange-400">
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Balance</p>
+                      <p className="text-lg font-bold text-orange-600 dark:text-orange-400">
                         ${loan.balance.toFixed(2)}
                       </p>
                     </div>
                     <div>
-                      <p className="text-xs text-gray-400">Paid</p>
-                      <p className="text-lg font-bold text-green-400">
+                      <p className="text-xs text-gray-600 dark:text-gray-400">Paid</p>
+                      <p className="text-lg font-bold text-green-600 dark:text-green-400">
                         ${loan.amount_paid.toFixed(2)}
                       </p>
                     </div>
