@@ -46,6 +46,15 @@ export interface LoanPayment {
   created_at: string;
 }
 
+export interface Mileage {
+  id: number;
+  date: string;
+  odometer: number;
+  miles: number;
+  notes?: string;
+  created_at: string;
+}
+
 export interface DashboardStats {
   totalIncome: number;
   totalExpenses: number;
@@ -55,4 +64,9 @@ export interface DashboardStats {
   totalHoursWorked: number;
   chargingExpenses: number;
   otherExpenses: number;
+  totalMiles: number;
+  mileageDeduction: number;
+  trueHourlyRate: number;
+  loanPercentOfIncome: number;
+  monthsToPayoff: number;
 }

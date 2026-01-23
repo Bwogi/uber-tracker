@@ -1,8 +1,8 @@
-import Database from 'better-sqlite3';
-import path from 'path';
-import fs from 'fs';
+import Database from "better-sqlite3";
+import path from "path";
+import fs from "fs";
 
-const dbPath = path.join(process.cwd(), 'uber-tracker.db');
+const dbPath = path.join(process.cwd(), "uber-tracker.db");
 
 // Ensure the directory exists
 const dir = path.dirname(dbPath);
@@ -13,7 +13,7 @@ if (!fs.existsSync(dir)) {
 const db = new Database(dbPath);
 
 // Enable foreign keys
-db.pragma('foreign_keys = ON');
+db.pragma("foreign_keys = ON");
 
 // Initialize database schema
 export function initializeDatabase() {
@@ -67,6 +67,25 @@ export function initializeDatabase() {
       created_at TEXT DEFAULT (datetime('now'))
     )
   `);
+
+  // Create mileage table for tracking odometer readings
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS mileage (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      date TEXT NOT NULL,
+      odometer REAL NOT NULL,
+      miles REAL DEFAULT 0,
+      notes TEXT,
+      created_at TEXT DEFAULT (datetime('now'))
+    )
+  `);
+
+  // Add odometer column if it doesn't exist (migration for existing tables)
+  try {
+    db.exec(`ALTER TABLE mileage ADD COLUMN odometer REAL DEFAULT 0`);
+  } catch (e) {
+    // Column already exists, ignore
+  }
 
   // Create loan_payments table for tracking loan payment history
   db.exec(`

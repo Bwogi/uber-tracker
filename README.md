@@ -1,7 +1,8 @@
 <div align="center">
 
-# Uber Tracker
-### Professional Financial Management for Rideshare Drivers
+# Fluxera
+
+### Financial Tracking for Gig Economy Drivers
 
 [![Next.js](https://img.shields.io/badge/Next.js-16.1.4-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)](https://www.typescriptlang.org/)
@@ -16,9 +17,9 @@
 
 ## Overview
 
-Uber Tracker is a comprehensive financial management system designed specifically for rideshare drivers. Built with modern web technologies, it provides real-time insights into your earnings, expenses, and profitability—helping you make informed decisions to maximize your income.
+Fluxera (from Latin "fluxus" meaning flow) is a comprehensive financial management system designed for gig economy drivers. Built with modern web technologies, it provides real-time insights into your earnings, expenses, and profitability—helping you make informed decisions to maximize your income.
 
-### Why Uber Tracker?
+### Why Fluxera?
 
 - **📊 Complete Financial Picture**: Track income, expenses, loans, and hours in one place
 - **💡 Intelligent Analysis**: Automated calculations for hourly rate, profit margins, and efficiency metrics
@@ -32,18 +33,21 @@ Uber Tracker is a comprehensive financial management system designed specificall
 ### Core Modules
 
 #### 💰 Income Tracking
-- Log daily Uber earnings with date and amount
+
+- Log daily rideshare/delivery earnings with date and amount
 - Add notes for trip details, bonuses, or promotions
 - View comprehensive income history
 - Calculate averages and totals automatically
 
 #### 💸 Expense Management
+
 - Separate tracking for charging costs and other expenses
 - Categorized expense breakdown and percentages
 - Identify cost patterns and optimization opportunities
 - Track expense-to-income ratios
 
 #### 📝 Loan Management
+
 - Track multiple loans with principal, interest, and balances
 - Record payments and view payment history
 - Automatic balance calculations
@@ -51,6 +55,7 @@ Uber Tracker is a comprehensive financial management system designed specificall
 - Estimate payoff timeline based on current profit
 
 #### ⏰ Work Hours Tracking
+
 - **Smart Time Calculation**: Automatically calculates hours from start/end times
 - **Overnight Shift Support**: Handles shifts that cross midnight
 - Real-time hour calculations with minute precision
@@ -58,6 +63,7 @@ Uber Tracker is a comprehensive financial management system designed specificall
 - Calculate hourly earning rates automatically
 
 #### 📊 Financial Dashboard
+
 - Real-time overview of all financial metrics
 - Net profit calculations (income - expenses - loans)
 - Hourly rate analysis
@@ -65,6 +71,7 @@ Uber Tracker is a comprehensive financial management system designed specificall
 - Quick stats and financial health indicators
 
 #### 📄 Professional Reports
+
 - **Multiple Report Types**: Summary, Income, Expenses, Loans, Hours
 - **Date Range Filtering**: Custom periods or preset ranges (weekly, monthly)
 - **Export Formats**:
@@ -89,15 +96,15 @@ Uber Tracker is a comprehensive financial management system designed specificall
 
 ## Technology Stack
 
-| Category | Technology | Purpose |
-|----------|------------|----------|
-| **Framework** | Next.js 16.1.4 with App Router | Modern React framework with server components |
-| **Language** | TypeScript 5.0 | Type-safe development |
-| **Database** | SQLite with better-sqlite3 | Lightweight, local data storage |
-| **Styling** | Tailwind CSS v4 | Utility-first CSS framework |
-| **UI Components** | Aceternity UI | Modern, animated components |
-| **Animation** | Framer Motion | Smooth, professional animations |
-| **Runtime** | Node.js 20+ | JavaScript runtime |
+| Category          | Technology                     | Purpose                                       |
+| ----------------- | ------------------------------ | --------------------------------------------- |
+| **Framework**     | Next.js 16.1.4 with App Router | Modern React framework with server components |
+| **Language**      | TypeScript 5.0                 | Type-safe development                         |
+| **Database**      | SQLite with better-sqlite3     | Lightweight, local data storage               |
+| **Styling**       | Tailwind CSS v4                | Utility-first CSS framework                   |
+| **UI Components** | Aceternity UI                  | Modern, animated components                   |
+| **Animation**     | Framer Motion                  | Smooth, professional animations               |
+| **Runtime**       | Node.js 20+                    | JavaScript runtime                            |
 
 ## Installation
 
@@ -114,16 +121,19 @@ Ensure you have the following installed:
 1. **Clone or download** this repository to your local machine
 
 2. **Navigate to the project directory**:
+
    ```bash
    cd uber-tracker
    ```
 
 3. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 4. **Start the development server**:
+
    ```bash
    npm run dev
    ```
@@ -147,6 +157,7 @@ npm start
 ### Network Access
 
 The app is configured to run on your local network by default:
+
 - Access from your phone/tablet on the same WiFi
 - Your network URL: http://[YOUR_LOCAL_IP]:3000
 - Find your IP: `ifconfig | grep "inet " | grep -v 127.0.0.1`
@@ -158,6 +169,7 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
 ### Getting Started
 
 #### First Time Setup
+
 1. **Start the application** as described in [Installation](#installation)
 2. **Navigate to Dashboard** - You'll see $0.00 for all metrics initially
 3. **Add your first income** entry to begin tracking
@@ -166,6 +178,7 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
 ### Core Workflows
 
 #### Daily Routine (Recommended)
+
 ```
 1. End of shift → Log Income (date, amount, notes)
 2. → Log Expenses (charging costs, other expenses)
@@ -174,6 +187,7 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
 ```
 
 #### Weekly Review
+
 ```
 1. Navigate to Reports
 2. Set date range to past week
@@ -183,6 +197,7 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
 ```
 
 #### Monthly Financial Review
+
 ```
 1. Generate monthly Summary report
 2. Export CSV for detailed analysis
@@ -194,9 +209,11 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
 ### Feature Details
 
 #### 💰 Income Page
+
 **Purpose**: Track all your Uber earnings
 
 **How to use**:
+
 1. Click **Income** in the navigation
 2. Select the date you earned the income
 3. Enter the amount (automatically formats as currency)
@@ -204,14 +221,17 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
 5. Click **Add Income**
 
 **Tips**:
+
 - Log income daily for accurate tracking
 - Use notes to identify high-earning patterns
 - Review total income displayed in the header
 
 #### 💸 Expenses Page
+
 **Purpose**: Track operating costs
 
 **How to use**:
+
 1. Click **Expenses** in the navigation
 2. Select date and expense type:
    - **Charging**: Electricity costs for EV charging
@@ -220,14 +240,17 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
 4. Click **Add Expense**
 
 **Tips**:
+
 - Separate charging from other costs for better analysis
 - Track everything—small expenses add up
 - Review expense breakdown percentages
 
 #### ⏰ Hours Page
+
 **Purpose**: Track work time and calculate hourly rates
 
 **How to use**:
+
 1. Click **Hours** in the navigation
 2. Select the date you worked
 3. Enter **Start Time** (e.g., 22:00 for 10 PM)
@@ -239,17 +262,20 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
 9. Click **Log Hours**
 
 **Tips**:
+
 - Hours auto-calculate as you type times
 - The app handles overnight shifts automatically
 - Manual override available if needed
 - Track start/end times for pattern analysis
 
 #### 📝 Loans Page
+
 **Purpose**: Manage debt and track payments
 
 **How to use**:
 
 **Adding a loan**:
+
 1. Click **Loans** in the navigation
 2. Enter loan details:
    - Name: "Car Payment", "Personal Loan", etc.
@@ -259,6 +285,7 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
 3. Click **Add Loan**
 
 **Making a payment**:
+
 1. Find your loan in the list
 2. Enter payment amount in the input field
 3. Click **Make Payment**
@@ -266,14 +293,17 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
 5. Loan marked as "paid" when balance reaches $0
 
 **Tips**:
+
 - Track all loans to see total obligation
 - Regular payments reduce loan burden
 - Reports show months to payoff at current rate
 
 #### 📊 Dashboard
+
 **Purpose**: Real-time financial overview
 
 **What you see**:
+
 - **Total Income**: All earnings in the system
 - **Total Expenses**: Charging + other costs
 - **Active Loans**: Outstanding balance owed
@@ -282,19 +312,23 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
 - **Hourly Rate**: Income ÷ Hours worked
 
 **Understanding the metrics**:
+
 - **Profit Margin**: What % of income is profit
 - **Expense Ratio**: What % goes to costs
 - **Loan Burden**: Loan impact on profitability
 
 **Tips**:
+
 - Check daily to monitor performance
 - Green values = good, Red = needs attention
 - Use Quick Stats for at-a-glance review
 
 #### 📄 Reports Page
+
 **Purpose**: Generate detailed financial analysis
 
 **How to use**:
+
 1. Click **Reports** in the navigation
 2. Select **Report Type**:
    - **Summary**: All data + analysis (recommended)
@@ -310,6 +344,7 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
    - **🖨️ Print Report**: Physical copy with header/footer
 
 **Report features**:
+
 - Professional filename with dates and timestamp
 - Profitability analysis with percentages
 - Productivity metrics (hours vs income)
@@ -318,6 +353,7 @@ See [NETWORK_ACCESS.md](./NETWORK_ACCESS.md) for detailed setup instructions.
 - Key insights with recommendations
 
 **Tips**:
+
 - Generate monthly reports for records
 - Use CSV for tax preparation
 - Compare week-to-week for trends
@@ -329,7 +365,8 @@ See [REPORTS_GUIDE.md](./REPORTS_GUIDE.md) for comprehensive documentation.
 
 ### Database
 
-Uber Tracker uses **SQLite** for local data storage:
+Fluxera uses **SQLite** for local data storage:
+
 - **File**: `uber-tracker.db` (created automatically on first run)
 - **Location**: Project root directory
 - **Size**: Minimal (typically < 1 MB)
@@ -337,13 +374,13 @@ Uber Tracker uses **SQLite** for local data storage:
 
 ### Database Schema
 
-| Table | Purpose | Key Fields |
-|-------|---------|------------|
-| `income` | Daily earnings | date, amount, notes |
-| `expenses` | Operating costs | date, type, amount, notes |
-| `work_hours` | Time tracking | date, hours_worked, start_time, end_time |
-| `loans` | Debt management | name, principal, balance, status |
-| `loan_payments` | Payment history | loan_id, amount, payment_date |
+| Table           | Purpose         | Key Fields                               |
+| --------------- | --------------- | ---------------------------------------- |
+| `income`        | Daily earnings  | date, amount, notes                      |
+| `expenses`      | Operating costs | date, type, amount, notes                |
+| `work_hours`    | Time tracking   | date, hours_worked, start_time, end_time |
+| `loans`         | Debt management | name, principal, balance, status         |
+| `loan_payments` | Payment history | loan_id, amount, payment_date            |
 
 ### Data Privacy
 
@@ -356,12 +393,14 @@ Uber Tracker uses **SQLite** for local data storage:
 ### Backup & Export
 
 **Manual Backup**:
+
 ```bash
 # Copy database file
 cp uber-tracker.db uber-tracker-backup-$(date +%Y%m%d).db
 ```
 
 **Export Data**:
+
 - Use Reports → Download CSV for spreadsheet-compatible export
 - All data exported in readable format
 - Import CSV into Excel, Google Sheets, or accounting software
@@ -370,14 +409,14 @@ cp uber-tracker.db uber-tracker-backup-$(date +%Y%m%d).db
 
 ### Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server (with network access) |
-| `npm run dev:local` | Start development server (localhost only) |
-| `npm run build` | Build for production |
-| `npm start` | Start production server (with network access) |
-| `npm run start:local` | Start production server (localhost only) |
-| `npm run lint` | Run ESLint for code quality |
+| Command               | Description                                    |
+| --------------------- | ---------------------------------------------- |
+| `npm run dev`         | Start development server (with network access) |
+| `npm run dev:local`   | Start development server (localhost only)      |
+| `npm run build`       | Build for production                           |
+| `npm start`           | Start production server (with network access)  |
+| `npm run start:local` | Start production server (localhost only)       |
+| `npm run lint`        | Run ESLint for code quality                    |
 
 ### Environment
 
@@ -389,7 +428,7 @@ cp uber-tracker.db uber-tracker-backup-$(date +%Y%m%d).db
 ## Project Structure
 
 ```
-uber-tracker/
+fluxera/
 ├── app/                      # Next.js App Router
 │   ├── api/                  # API routes (RESTful endpoints)
 │   │   ├── income/           # Income CRUD operations
@@ -421,7 +460,7 @@ uber-tracker/
 ├── NETWORK_ACCESS.md         # Network setup guide
 ├── REPORTS_GUIDE.md          # Reports documentation
 ├── QUICKSTART.md             # Getting started guide
-└── uber-tracker.db           # SQLite database (auto-generated)
+└── fluxera.db                # SQLite database (auto-generated)
 ```
 
 ## Documentation
@@ -477,6 +516,7 @@ Comprehensive guides are available:
 ### Common Issues
 
 **Port already in use**
+
 ```bash
 # Kill process on port 3000
 lsof -ti:3000 | xargs kill -9
@@ -485,6 +525,7 @@ lsof -ti:3000 | xargs kill -9
 ```
 
 **Database locked error**
+
 ```bash
 # Close all app instances
 # Delete lock file
@@ -492,6 +533,7 @@ rm -rf .next/dev/lock
 ```
 
 **Changes not showing**
+
 ```bash
 # Clear Next.js cache
 rm -rf .next
@@ -499,6 +541,7 @@ npm run dev
 ```
 
 **Can't access from other devices**
+
 - Ensure devices are on same WiFi network
 - Check firewall settings (see NETWORK_ACCESS.md)
 - Verify your local IP address hasn't changed
@@ -506,6 +549,7 @@ npm run dev
 ## Support
 
 For issues or questions:
+
 1. Check the [Documentation](#documentation) section
 2. Review [Troubleshooting](#troubleshooting) above
 3. Verify your Node.js version: `node --version`
@@ -529,8 +573,8 @@ MIT License - See LICENSE file for details
 
 <div align="center">
 
-**Track Smart. Drive Profitable. Succeed.**
+**Fluxera** — _Track Smart. Drive Profitable. Succeed._
 
-Made for rideshare drivers who take their business seriously.
+Made for gig economy drivers who take their business seriously.
 
 </div>

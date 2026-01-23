@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Uber Tracker - Manage Income, Expenses & Loans",
-  description: "Track your Uber income, charging expenses, loans, and working hours",
+  title: "Fluxera - Gig Economy Financial Tracker",
+  description: "Track your rideshare and delivery income, expenses, mileage deductions, and loans. Designed for Uber, Lyft, DoorDash, and gig economy drivers.",
 };
 
 export default function RootLayout({

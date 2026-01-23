@@ -4,6 +4,9 @@ import { DashboardStats } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
 
+// IRS standard mileage rate for 2024
+const MILEAGE_RATE = 0.67;
+
 export async function GET() {
   try {
     // Get total income
@@ -34,8 +37,40 @@ export async function GET() {
     const hoursResult = db.prepare('SELECT COALESCE(SUM(hours_worked), 0) as total FROM work_hours').get() as { total: number } | undefined;
     const totalHoursWorked = hoursResult?.total || 0;
 
+    // Get total miles driven
+    const milesResult = db.prepare('SELECT COALESCE(SUM(miles), 0) as total FROM mileage').get() as { total: number } | undefined;
+    const totalMiles = milesResult?.total || 0;
+
+    // Calculate mileage deduction
+    const mileageDeduction = totalMiles * MILEAGE_RATE;
+
     // Calculate net profit (income - expenses - loan payments)
     const netProfit = totalIncome - totalExpenses - loansPaid;
+
+    // Calculate true hourly rate (net profit / hours worked)
+    const trueHourlyRate = totalHoursWorked > 0 ? netProfit / totalHoursWorked : 0;
+
+    // Calculate loan burden as percentage of income
+    const loanPercentOfIncome = totalIncome > 0 ? (loansPaid / totalIncome) * 100 : 0;
+
+    // Calculate months to payoff (assuming current monthly net profit rate)
+    // Get income from last 30 days to estimate monthly rate
+    const monthlyIncomeResult = db.prepare(`
+      SELECT COALESCE(SUM(amount), 0) as total FROM income 
+      WHERE date >= date('now', '-30 days')
+    `).get() as { total: number } | undefined;
+    const monthlyIncome = monthlyIncomeResult?.total || 0;
+
+    const monthlyExpensesResult = db.prepare(`
+      SELECT COALESCE(SUM(amount), 0) as total FROM expenses 
+      WHERE date >= date('now', '-30 days')
+    `).get() as { total: number } | undefined;
+    const monthlyExpenses = monthlyExpensesResult?.total || 0;
+
+    const monthlyNetProfit = monthlyIncome - monthlyExpenses;
+    const monthsToPayoff = monthlyNetProfit > 0 && totalLoans > 0 
+      ? Math.ceil(totalLoans / monthlyNetProfit) 
+      : 0;
 
     const stats: DashboardStats = {
       totalIncome,
@@ -46,6 +81,11 @@ export async function GET() {
       totalHoursWorked,
       chargingExpenses,
       otherExpenses,
+      totalMiles,
+      mileageDeduction,
+      trueHourlyRate,
+      loanPercentOfIncome,
+      monthsToPayoff,
     };
 
     return NextResponse.json(stats);

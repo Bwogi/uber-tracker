@@ -5,12 +5,13 @@ import { Card, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { Income } from "@/lib/types";
+import { getLocalDateString } from "@/lib/utils";
 
 export default function IncomePage() {
   const [income, setIncome] = useState<Income[]>([]);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
-    date: new Date().toISOString().split("T")[0],
+    date: getLocalDateString(),
     amount: "",
     notes: "",
   });
@@ -42,7 +43,7 @@ export default function IncomePage() {
 
       if (response.ok) {
         setFormData({
-          date: new Date().toISOString().split("T")[0],
+          date: getLocalDateString(),
           amount: "",
           notes: "",
         });

@@ -5,12 +5,13 @@ import { Card, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { WorkHours } from "@/lib/types";
+import { getLocalDateString } from "@/lib/utils";
 
 export default function HoursPage() {
   const [hours, setHours] = useState<WorkHours[]>([]);
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
-    date: new Date().toISOString().split("T")[0],
+    date: getLocalDateString(),
     hours_worked: "",
     start_time: "",
     end_time: "",
@@ -110,7 +111,7 @@ export default function HoursPage() {
 
       if (response.ok) {
         setFormData({
-          date: new Date().toISOString().split("T")[0],
+          date: getLocalDateString(),
           hours_worked: "",
           start_time: "",
           end_time: "",

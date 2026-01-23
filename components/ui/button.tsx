@@ -15,13 +15,14 @@ export const Button = ({
   className?: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
-  variant?: "primary" | "secondary" | "danger";
+  variant?: "primary" | "secondary" | "danger" | "outline";
   disabled?: boolean;
 }) => {
   const variants = {
     primary: "bg-blue-600 hover:bg-blue-700 text-white",
     secondary: "bg-gray-700 hover:bg-gray-600 text-white",
     danger: "bg-red-600 hover:bg-red-700 text-white",
+    outline: "bg-transparent border-2 border-current hover:bg-white/10",
   };
 
   return (
