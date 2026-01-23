@@ -43,14 +43,9 @@ export default function HoursPage() {
     let startMinutes = startHour * 60 + startMin;
     let endMinutes = endHour * 60 + endMin;
     
-    // If work spans to next day, add 24 hours to end time
-    if (nextDay) {
+    // Only add 24 hours if explicitly marked as next day OR if end time is before start time
+    if (nextDay || endMinutes < startMinutes) {
       endMinutes += 24 * 60;
-    }
-    // If end time is earlier than start time and not marked as next day, assume next day
-    else if (endMinutes < startMinutes) {
-      endMinutes += 24 * 60;
-      setSpansNextDay(true);
     }
     
     const totalMinutes = endMinutes - startMinutes;
@@ -65,10 +60,28 @@ export default function HoursPage() {
     
     // Auto-calculate hours if both times are set
     if (newFormData.start_time && newFormData.end_time) {
+      // Auto-detect if work spans next day (when end time is before start time)
+      const [startHour, startMin] = newFormData.start_time.split(':').map(Number);
+      const [endHour, endMin] = newFormData.end_time.split(':').map(Number);
+      const startMinutes = startHour * 60 + startMin;
+      const endMinutes = endHour * 60 + endMin;
+      
+      const shouldSpanNextDay = endMinutes < startMinutes;
+      
+      // If end time is earlier than start time, auto-check the box
+      if (shouldSpanNextDay && !spansNextDay) {
+        setSpansNextDay(true);
+      }
+      // If end time is later than start time, auto-uncheck the box
+      else if (!shouldSpanNextDay && spansNextDay) {
+        setSpansNextDay(false);
+      }
+      
+      // Use the auto-detected value for calculation, not the current state
       const calculatedHours = calculateHours(
         newFormData.start_time,
         newFormData.end_time,
-        spansNextDay
+        shouldSpanNextDay
       );
       setFormData(prev => ({ ...prev, hours_worked: calculatedHours.toString() }));
     }
